@@ -3,15 +3,20 @@
 * {
   font-family: 'Open Sans Condensed', sans-serif;
 }
-body {
-  max-width:320px;
-  margin:0 auto;
-}
+
+
+/*body {
+  text-align: center;
+}*/
+
+
 h1 {
   font-size:52px;
   font-weight:300;
   margin:10px 0 20px 0;
 }
+
+
 input {
   border:none;
   width:100%;
@@ -20,6 +25,31 @@ input {
   padding:8px 20px;
   outline: none;
 }
+
+.red {
+  -webkit-animation: makeRed .5s;
+  -webkit-animation-fill-mode: forwards;
+}
+ 
+@-webkit-keyframes makeRed {
+     0%   {background-color: #eee;}
+     50%  {background-color: #F7D1D1;}
+     100% {background-color: #eee;}
+}
+
+
+.green {
+  -webkit-animation: makeGreen .5s;
+  -webkit-animation-fill-mode: forwards;
+}
+ 
+@-webkit-keyframes makeGreen {
+     0%   {background-color: #eee;}
+     50%  {background-color: #D5FFCE;}
+     100% {background-color: #eee;}
+}
+
+
 ul {
   margin:20px 0;
   padding:0;
@@ -32,12 +62,21 @@ ul li {
   margin-bottom:1px;
   padding:8px 20px;
   font-size:22px;
+  border-radius:2px;
+}
+
+
+.main {
+  max-width:320px;
+  margin:0 auto;
+  margin-top: 2%;
 }
 
 .completed {
   text-decoration:line-through;
-  color:#eee;
+  color:#FF6666;
 }
+
 
 #add_todo{
   margin-top: 20px;
@@ -52,4 +91,87 @@ ul li {
   box-shadow:0 2px 0 0 #662929;
   border-radius:4px;
   text-align: center;
+}
+
+/* Wobble Horizontal */
+
+.wobble {
+  -webkit-animation-name: wobble;
+  animation-name: wobble;
+  -webkit-animation-duration: .7s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  }
+
+
+@-webkit-keyframes wobble {
+  16.65% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+
+  33.3% {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-6px);
+  }
+
+  49.95% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+
+  66.6% {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+  }
+
+  83.25% {
+    -webkit-transform: translateY(1px);
+    transform: translateY(1px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+
+ul.item-list > li { 
+  display: block; height: 25px; 
+}
+
+
+.item { 
+  float: left; 
+}
+
+
+.delete { 
+  float: right; 
+}
+
+
+.icon {
+  width: 27px;
+  margin-right: -10px;
+  padding-left: 8px;
+}
+
+
+
+
+[data-type="heart"] {
+
 }

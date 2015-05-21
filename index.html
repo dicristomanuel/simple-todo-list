@@ -6,13 +6,24 @@
 	</head>
 		
 	<body>
-		<h1>To Do List</h1>
-		<label for="todoitem"> 
-				<input type="text" name="todoitem" id="todoitem">
-			</label>
-		<ul></ul>
-		<div id="add_todo">Add Todo</div>
+		<div class="main">
+			<h1>To Do List</h1>
+			<label for="todoitem"> 
+					<input type="text" name="todoitem" id="todoitem">
+				</label>
+	<ul class="item-list">
+    <li>
+    	<div class="item">Title</div><div class="delete">
+    		<div class="special"><img src="img/heart.png" class="icon" data-type="heart">
+    		<img src="img/trash.png" class="icon" data-type="trash">
+    	</div>
+  	</li>
+	</ul>
+<!-- 			</ul>
+ -->			<div id="add_todo">Add Todo</div>
+		<div> <!-- class="main" -->
 		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="script.js"></script>
 	</body>
 
