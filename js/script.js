@@ -12,7 +12,7 @@ var input = $( "input" );
 	$( toDoButton ).click(function() {
 		var current = $( "input" );
 		var value = $( current ).val();
-		var item = $( "<li>" + value +"</li>" );
+		var item = $('<li><img src="img/trash.png" class="icon right" data-type="trash"><img src="img/heart.png" class="icon right" data-type="heart">' + value +'</li>');
 						if (value) {
 				$( list ).append(item);
 				$(current).val("");
@@ -38,7 +38,7 @@ var input = $( "input" );
 	    if (key === 13) {
 		var current = $( "input" );
 		var value = $( current ).val();
-		var item = $( "<li>" + value +"</li>" );
+		var item = $('<li><img src="img/trash.png" class="icon right" data-type="trash"><img src="img/heart.png" class="icon right" data-type="heart">' + value +'</li>');
 			$(current).val("");
 			if (value) {
 				$( list ).append(item);
@@ -71,34 +71,19 @@ var input = $( "input" );
 	});
 
 
-/* Interacting with the side icons in the list elements ¯\_(ツ) */ 
+	$("[data-type='trash']").click(function() {
+		$(this).addClass("click-icon");
+		});
 
-	$('*[data-type="heart"]').hover(
+$("[data-type='trash']").hover(function() {
+		$(this).addClass("grow");
+		},
+
 		function() {
-    $( this ).attr("src", "img/heart-hover.png")
-  },
-    
-    function() {
-    	$(this).attr("src", "img/heart.png");
-    }
-);
-
-		$('*[data-type="heart"]').click(
-		function() {
-    $(this).attr("src", "img/heart-lit.png")
-    $(this).unbind('mouseenter mouseleave');
-  }
-);
+		$(this).removeClass("grow");
+		});
 
 
-	$('*[data-type="trash"]').hover(
-		function() {
-    $(this).attr("src", "img/trash-hover.png")},
-    
-    function() {
-    	$(this).attr("src", "img/trash.png");
-    }
-);
 
 
 
