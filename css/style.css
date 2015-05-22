@@ -4,16 +4,32 @@
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
+@media only screen and (min-width:1000px) {
+  h1 {
+    font-size:3vw;
+    font-weight:300;
+  }
+}
 
-/*body {
-  text-align: center;
-}*/
+@media only screen and (max-width:1000px) and (min-width:800px) {
+  h1 {
+    font-size:4vw;
+    font-weight:300;
+  }
+}
 
+@media only screen and (max-width:800px) and (min-width:500px) {
+  h1 {
+    font-size:5vw;
+    font-weight:300;
+  }
+}
 
-h1 {
-  font-size:52px;
-  font-weight:300;
-  margin:10px 0 20px 0;
+@media only screen and (max-width:500px) {
+  h1 {
+    font-size:8vw;
+    font-weight:300;
+  }
 }
 
 
@@ -22,8 +38,9 @@ input {
   width:100%;
   font-size:22px;
   background:#eee;
-  padding:8px 20px;
+  padding: 10px 20px;  
   outline: none;
+  margin-left: -15px;
 }
 
 .red {
@@ -60,7 +77,8 @@ ul li {
   background:#ccc;
   color:#666;
   margin-bottom:1px;
-  padding:8px 20px;
+  padding: 10px 20px;
+  margin-left: -15px;
   font-size:22px;
   border-radius:2px;
 }
@@ -79,9 +97,8 @@ ul li {
 
 
 #add_todo{
-  margin-top: 20px;
-  margin-left:10px;
-  margin-right: 190px; 
+  margin-top: 5%;
+  float: left;
   background:#FF6666;
   color:#662929;
   font-size:16px;
@@ -153,25 +170,50 @@ ul.item-list > li {
 }
 
 
-.item { 
+.left { 
   float: left; 
 }
 
 
-.delete { 
+.right { 
   float: right; 
 }
 
 
 .icon {
-  width: 27px;
+  width: 35px;
   margin-right: -10px;
   padding-left: 8px;
 }
 
 
 
-
 [data-type="heart"] {
+  display: inline-block;  
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
 
+[data-type="heart"]:hover, [data-type="heart"]:focus, [data-type="heart"]:active {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+/* Pulse */
+@-webkit-keyframes pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
 }
