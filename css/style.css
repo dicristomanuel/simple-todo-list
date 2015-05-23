@@ -85,7 +85,7 @@ ul li {
 
 
 .green {
-  -webkit-animation: makeGreen .5s;
+  -webkit-animation: makeGreen .4s;
   -webkit-animation-fill-mode: forwards;
 }
  
@@ -267,3 +267,35 @@ ul li {
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
 }
+
+
+@-webkit-keyframes hvr-icon-float-away {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-1em);
+    transform: translateY(-1em);
+  }
+}
+
+@keyframes hvr-icon-float-away {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-1em);
+    transform: translateY(-1em);
+  }
+}
+
+/* Icon Float Away */
+.removeUp {
+  top: 50px;
+}
+
+

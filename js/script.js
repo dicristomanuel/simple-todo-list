@@ -5,9 +5,9 @@
 /* (ツ)_/¯ Selects toDoButton and when clicked appends the 
 						new item to the list */ 
 
-var toDoButton = $( "div#add_todo" );
-var list = $( "ul" );
-var input = $( ".group-header" );
+var toDoButton = $("div#add_todo");
+var list = $("ul");
+var input = $(".group-header");
 	
 	$( toDoButton ).click(function() {
 		var current = $( "input" );
@@ -16,11 +16,12 @@ var input = $( ".group-header" );
 						if (value) {
 				$( list ).append(item);
 				$(current).val("");
-				$(item).addClass("wobble")
+				$(item).addClass("wobble");
 				$(input).addClass("green");
 
 				setTimeout(function(){
 	        				$(input).removeClass("green");
+	        				$(item).removeClass("wobble")
 	    					}, 600);
 			} else {
 				$(input).addClass("red");
@@ -48,6 +49,7 @@ var input = $( ".group-header" );
 
 				setTimeout(function(){
 	        				$(input).removeClass("green");
+	        				$(item).removeClass("wobble")
 	    					}, 600);
 			} else {
 				$(input).addClass("red");
@@ -62,28 +64,10 @@ var input = $( ".group-header" );
 
 /* (ツ)_/¯ Click and hold an item on the list in order to perform an action
 						like delete or heart it. */ 
-
-// var timeoutId = 0;
-// list.on("mousedown", function(evt) {
-// 	var item = $(evt.srcElement);
-//     timeoutId = setTimeout(function() {
-// 			item.addClass("makeBigger");
-// 					console.log("down");
-//     		}, 250);
-// 	}).bind('mouseup', function(evt) {
-// 		var item = $(evt.srcElement);
-// 		item.removeClass("makeBigger");
-//     clearTimeout(timeoutId);
-// });
-
-	// list.click(function(evt) {
-// 	var item = $(evt.srcElement);
-//     item.addClass("completed");
-// });
-
+var item;
 var itemSelected = [];
 list.mousedown(function(evt) {
-	var item = $(evt.srcElement);
+	item = $(evt.srcElement);
     setTimeout(function() {
    		if(item.hasClass("makeBigger")) {
    			item.removeClass("makeBigger");
@@ -92,9 +76,10 @@ list.mousedown(function(evt) {
    		} else {
 			item.addClass("makeBigger");
 					itemSelected.push(item[0]);
-				}//ifStatement
-    		}, 100)
+			}//ifStatement
+    }, 100)
 });
+
 
 	var heart = $("[data-type='heart']");
 	heart.click(function() {
@@ -112,7 +97,13 @@ list.mousedown(function(evt) {
 
 	var trash = $("[data-type='trash']");
 		trash.click(function() {
+				var lis = document.querySelectorAll("li")
+				var index = $(lis).index(item)-1;
 				$(itemSelected).remove();
+				$( "li:gt("+ index +")" ).addClass("wobble");
+				setTimeout(function(){
+	        				$( "li:gt("+ index +")" ).removeClass("wobble");
+	    					}, 600);
 				itemSelected = [];
 		});
 
