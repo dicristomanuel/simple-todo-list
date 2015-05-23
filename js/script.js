@@ -7,12 +7,12 @@
 
 var toDoButton = $( "div#add_todo" );
 var list = $( "ul" )[0];
-var input = $( "input" );
+var input = $( ".group-header" );
 	
 	$( toDoButton ).click(function() {
 		var current = $( "input" );
 		var value = $( current ).val();
-		var item = $('<li><img src="img/trash.png" class="icon right" data-type="trash"><img src="img/heart.png" class="icon right" data-type="heart">' + value +'</li>');
+		var item = $('<li>' + value +'</li>');
 						if (value) {
 				$( list ).append(item);
 				$(current).val("");
@@ -38,7 +38,7 @@ var input = $( "input" );
 	    if (key === 13) {
 		var current = $( "input" );
 		var value = $( current ).val();
-		var item = $('<li><img src="img/trash.png" class="icon right" data-type="trash"><img src="img/heart.png" class="icon right" data-type="heart">' + value +'</li>');
+		var item = $('<li>' + value +'</li>');
 			$(current).val("");
 			if (value) {
 				$( list ).append(item);
