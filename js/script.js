@@ -131,4 +131,8 @@ $("[data-type='trash']").hover(function() {
 
 
 document.cookie = "ToDoList=firstTimeVisit";
-console.log(document.cookie);
+if (document.cookie === "ToDoList=firstTimeVisit") {
+	console.log("YUP");
+} else {
+	console.log("Presentation time!");
+}
