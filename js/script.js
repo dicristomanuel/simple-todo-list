@@ -129,10 +129,11 @@ $("[data-type='trash']").hover(function() {
 		$(this).removeClass("grow");
 		});
 
-
-document.cookie = "ToDoList=firstTimeVisit";
 if (document.cookie === "ToDoList=firstTimeVisit") {
 	console.log("YUP");
 } else {
 	console.log("Presentation time!");
 }
+
+
+document.cookie = "ToDoList=firstTimeVisit";
