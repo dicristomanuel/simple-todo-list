@@ -130,6 +130,6 @@ $("[data-type='trash']").hover(function() {
 		});
 
 
-document.cookie = "name=oeschger";
-document.cookie = "favorite_food=tripe";
+// document.cookie = "name=oeschger";
+// document.cookie = "favorite_food=tripe";
 console.log(document.cookie);
