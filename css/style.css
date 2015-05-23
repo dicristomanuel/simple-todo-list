@@ -32,6 +32,11 @@
   }
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 
 input {
   border:none;

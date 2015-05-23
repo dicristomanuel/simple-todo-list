@@ -99,17 +99,26 @@ list.mousedown(function(evt) {
 		trash.click(function() {
 				var lis = document.querySelectorAll("li")
 				var index = $(lis).index(item)-1;
+				if(index >= 0) {
 				$(itemSelected).remove();
 				$( "li:gt("+ index +")" ).addClass("wobble");
 				setTimeout(function(){
 	        				$( "li:gt("+ index +")" ).removeClass("wobble");
 	    					}, 600);
+			} else {
+				$(itemSelected).remove();
+				$( "li" ).addClass("wobble");
+				setTimeout(function(){
+	        				$( "li" ).removeClass("wobble");
+	    					}, 600);
+			}//ifStatement
+
 				itemSelected = [];
 		});
 
 
 	trash.click(function() {
-		$(this).addClass("click-icon");
+		$(this).removeClass("grow");
 		});
 
 $("[data-type='trash']").hover(function() {
