@@ -76,23 +76,44 @@ var input = $( ".group-header" );
 //     clearTimeout(timeoutId);
 // });
 
+	// list.click(function(evt) {
+// 	var item = $(evt.srcElement);
+//     item.addClass("completed");
+// });
+
 
 var timeoutId = 0;
 var itemSelected = [];
 list.on("mousedown", function(evt) {
 	var item = $(evt.srcElement);
     timeoutId = setTimeout(function() {
+   		if(item.hasClass("makeBigger")) {
+   			item.removeClass("makeBigger");
+   			var toRemove = itemSelected.indexOf(item[0]);
+    		itemSelected.splice(toRemove, 1);
+
+   		} else {
 			item.addClass("makeBigger");
-					console.log("down");
-    		}, 250);
-	}).bind('mouseup', function(evt) {
-		var item = $(evt.srcElement);
-		item.removeClass("makeBigger");
-    clearTimeout(timeoutId);
+					itemSelected.push(item[0]);
+				}
+    		}, 250)
 });
 
+	var heart = $("[data-type='heart']");
+	heart.click(function() {
+				$(itemSelected).addClass("makeRed");
+				$(itemSelected).removeClass("makeBigger");
+					itemSelected = [];
+			});
 
-	$("[data-type='trash']").click(function() {
+		var trash = $("[data-type='trash']");
+	trash.click(function() {
+					$(itemSelected).remove();
+					itemSelected = [];
+			});
+
+
+	trash.click(function() {
 		$(this).addClass("click-icon");
 		});
 

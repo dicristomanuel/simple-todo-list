@@ -68,6 +68,10 @@ ul li {
   margin-left: -30px;
 }
 
+.makeRed {
+  background: #FF6666;
+}
+
 .red {
   -webkit-animation: makeRed .5s;
   -webkit-animation-fill-mode: forwards;
