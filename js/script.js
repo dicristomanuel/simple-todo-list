@@ -6,7 +6,7 @@
 						new item to the list */ 
 
 var toDoButton = $( "div#add_todo" );
-var list = $( "ul" )[0];
+var list = $( "ul" );
 var input = $( ".group-header" );
 	
 	$( toDoButton ).click(function() {
@@ -59,16 +59,37 @@ var input = $( ".group-header" );
 	});
 
 
-/* (ツ)_/¯ When a task is completed user clicks on it and I add the 
-						completed class which will change its appereance */ 
-	list.addEventListener("click", function(evt) {
-		var item = evt.srcElement;
-		if($(item).hasClass("completed")) {
-			$(item).removeClass("completed");
-		} else {
-		$(item).addClass("completed");
-	}
-	});
+
+/* (ツ)_/¯ Click and hold an item on the list in order to perform an action
+						like delete or heart it. */ 
+
+// var timeoutId = 0;
+// list.on("mousedown", function(evt) {
+// 	var item = $(evt.srcElement);
+//     timeoutId = setTimeout(function() {
+// 			item.addClass("makeBigger");
+// 					console.log("down");
+//     		}, 250);
+// 	}).bind('mouseup', function(evt) {
+// 		var item = $(evt.srcElement);
+// 		item.removeClass("makeBigger");
+//     clearTimeout(timeoutId);
+// });
+
+
+var timeoutId = 0;
+var itemSelected = [];
+list.on("mousedown", function(evt) {
+	var item = $(evt.srcElement);
+    timeoutId = setTimeout(function() {
+			item.addClass("makeBigger");
+					console.log("down");
+    		}, 250);
+	}).bind('mouseup', function(evt) {
+		var item = $(evt.srcElement);
+		item.removeClass("makeBigger");
+    clearTimeout(timeoutId);
+});
 
 
 	$("[data-type='trash']").click(function() {

@@ -63,6 +63,11 @@ ul li {
   border-radius:3px;
 }
 
+.makeBigger {
+  width:110%;
+  margin-left: -30px;
+}
+
 .red {
   -webkit-animation: makeRed .5s;
   -webkit-animation-fill-mode: forwards;
