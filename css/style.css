@@ -346,35 +346,69 @@ ul li {
 }
 
 
-.hints {
-  position: absolute;
-  float: left;
-  width: 95%;
-  height: 95%;
-  z-index: 1;
-  left: 0;
-  top:0;
-}
-
-.bubbles {
-  position: absolute;
-  float: left;
-  z-index: 2;
-  left: 0;
-  top:0;
-  width: 78%;
-}
-
 #firstBubble {
-  margin-left: 15%;
-  margin-top: 3%;
+  position: absolute;
+  width: 85%;
+  left: -27%;
+  top:2%;
 }
 
+#secondBubble {
+  margin-right: 5%;
+  position: absolute;
+  width: 16%;
+  left:2.9%;
+  top: 23%;
+}
+
+#thirdBubble {
+  margin-right: 1%;
+  position: absolute;
+  width: 16%;
+  left:2%;
+  top: 12%;
+}
+
+@media only screen and (max-width:1026px) {
+  #secondBubble {
+    width: 20vw;
+    margin-left:4vw;
+  }
+
+  #firstBubble {
+  width: 80%;
+  top: 8%;
+  }
+}
+
+@media only screen and (max-width:799px) {
+  #secondBubble {
+    width: 15vw;
+    margin-left:4vw;
+  }
+
+  #firstBubble {
+    width: 90%;
+    top: 12%;
+  }
+}
+
+@media only screen and (max-width:500px) {
+  #secondBubble {
+    visibility: hidden;
+  }
+  
+  #firstBubble {
+    visibility: hidden;
+  }
+}
 
 #x {
   width: 2%;
-  margin-left: 98%;
+  margin-left: 95%;
   margin-top: 2%;
+  float: right;
+  position: absolute;
 }
 
 
