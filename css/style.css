@@ -299,38 +299,10 @@ ul li {
 }
 
 
-.overlay {
-position: absolute;
-z-index: 1;
-width: 100%;
-}
-
-.bghint {
-  position: absolute;
-  float: left;
-  width: 95%;
-  height: 95%;
-  z-index: 1;
-  left: 0;
-  top:0;
-}
-
-.bubbles {
-  position: absolute;
-  float: left;
-  width: 95%;
-  height: 95%;
-  z-index: 2;
-  left: 0;
-  top:0;
-
-}
-
 .fadeIn {
   -webkit-animation: fadeIn 2s;
   -webkit-animation-fill-mode: forwards;
   opacity: 0;
-
 }
 
 @-webkit-keyframes fadeIn {
@@ -372,4 +344,60 @@ width: 100%;
     transform: translateY(-8px);
   }
 }
+
+
+.hints {
+  position: absolute;
+  float: left;
+  width: 95%;
+  height: 95%;
+  z-index: 1;
+  left: 0;
+  top:0;
+}
+
+.bubbles {
+  position: absolute;
+  float: left;
+  z-index: 2;
+  left: 0;
+  top:0;
+  width: 78%;
+}
+
+#firstBubble {
+  margin-left: 15%;
+  margin-top: 3%;
+}
+
+
+#x {
+  width: 2%;
+  margin-left: 98%;
+  margin-top: 2%;
+}
+
+
+.rotate:hover {
+   display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-animation: rotate .8s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+
+@-webkit-keyframes rotate {
+     0%   {-webkit-transform: rotateZ(0deg);}
+     50%   {-webkit-transform: rotateZ(80deg);}
+     51%   {-webkit-transform: rotateZ(81deg);}
+     100% {-webkit-transform: rotateZ(360deg);}
+}
+
+
+
 

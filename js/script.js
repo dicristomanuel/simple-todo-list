@@ -2,11 +2,45 @@
 	// ¯\_(ツ)_/¯ Hi! I'm Cody, I will help you navigate the code.
 
 
-if (document.cookie !== "ToDoList=firstTimeVisit") {
-	$("body").prepend($('<div class="overlay bghint"><img src="img/background_hints.png" alt="background hints" class="fadeIn">'));
-	$(".overlay").append('<img src="img/step1.png" alt="Step1 hints" class="bubbles float">');
-
+if (document.cookie !== "ToDoList=bubbleFirst") {
+	bubbleFirst();
 } 
+
+/* if bubbleFirst.cookie doesn't exist show first hint bubble. Also defining functions
+		for the other bubbles which will come later on  ¯\_(ツ) */ 
+function bubbleFirst() {
+	var body = $("body");
+	var exit = false;
+		body.prepend($('<div class="hints">'));
+			$(".hints").prepend('<img src="img/xIcon.png" class="bubbles rotate" id="x">');
+			$(".hints").append('<img src="img/step1.png" alt="Step1 hints" class="bubbles float" id="firstBubble">');
+			$("#x").click(function() {
+				exit = true;
+					if(exit === true) {
+						$(".hints").remove();
+					}
+				});
+			$("#firstBubble").click(function() {
+					$(".hints").remove();
+				})
+}//bubbleFirst
+
+function bubbleSecond() {
+	var body = $("body");
+	var exit = false;
+		body.prepend($('<div class="hints">'));
+			$(".hints").prepend('<img src="img/xIcon.png" class="bubbles rotate" id="x">');
+			$(".hints").append('<img src="img/step2.png" alt="Step1 hints" class="bubbles float" id="secondBubble">');
+			$("#x").click(function() {
+				exit = true;
+					if(exit === true) {
+						$(".hints").remove();
+					}
+				});
+			$("#secondBubble").click(function() {
+					$(".hints").remove();
+				})
+}//bubbleFirst
 	
 /* (ツ)_/¯ Selects toDoButton and when clicked appends the 
 						new item to the list */ 
@@ -19,7 +53,7 @@ var input = $(".group-header");
 		var current = $( "input" );
 		var value = $( current ).val();
 		var item = $('<li>' + value +'</li>');
-						if (value) {
+			if (value) {
 				$( list ).append(item);
 				$(current).val("");
 				$(item).addClass("wobble");
@@ -35,6 +69,10 @@ var input = $(".group-header");
 	        				$(input).removeClass("red");
 	    					}, 600);
 			}//ifStatement
+
+			if (document.cookie !== "ToDoList=bubbleSecond") {
+				bubbleSecond();
+			}//ifStatement  
 	});//click 
 
 
@@ -64,6 +102,10 @@ var input = $(".group-header");
 	    					}, 600);
 			}//ifStatement
 		}//ifStatement
+
+		if (document.cookie !== "ToDoList=bubbleSecond") {
+				bubbleSecond();
+			}//ifStatement  
 	});
 
 
@@ -105,7 +147,8 @@ list.mousedown(function(evt) {
 		trash.click(function() {
 				var lis = document.querySelectorAll("li")
 				var index = $(lis).index(item)-1;
-				if(index >= 0) {
+				console.log(index);
+				if(index > 0) {
 				$(itemSelected).remove();
 				$( "li:gt("+ index +")" ).addClass("wobble");
 				setTimeout(function(){
@@ -136,4 +179,5 @@ $("[data-type='trash']").hover(function() {
 		});
 
 
-document.cookie = "ToDoList=firstTimeVisit";
+document.cookie = "ToDoList=bubbleFirst";
+document.cookie = "ToDoList=bubbleSecond";
