@@ -1,62 +1,61 @@
 //ToDoList 
 	// ¯\_(ツ)_/¯ Hi! I'm Cody, I will help you navigate the code.
 
+	var bubbleSecondShown = true;
+	var bubbleThirdShown = true;
+	var bubbleFourthShown = true;
 
-// if (document.cookie !== "ToDoList=markFirstVisit") {
-// 	bubbleFirst();
-// 	var bubbleSecondShown = false;
-// 	var bubbleThirdShown = false;
-// 	var bubbleFourtShown = false;
-// } else {
-// 	var bubbleSecondShown = true;
-// 	var bubbleThirdShown = true;
-// 	var bubbleFourtShown = true;
-// }
+if (document.cookie !== "ToDoList=FirstVisit") {
+	bubbleFirst();
+	var bubbleSecondShown = false;
+	var bubbleThirdShown = false;
+	var bubbleFourthShown = false;
+}
 
-bubbleFirst();
+// bubbleFirst();
+// var bubbleSecondShown = false;
+// var bubbleThirdShown = false;
+// var bubbleFourthShown = false;
 
 /* if bubbleFirst.cookie doesn't exist show first hint bubble. Also defining functions
 		for the other bubbles which will come later on  ¯\_(ツ) */ 
 function bubbleFirst() {
 	var body = $("body");
 	var exit = false;
-		body.prepend($('<div class="hints">'));
+		body.prepend($('<div class="hints" id="first">'));
 			$(".hints").prepend('<img src="img/xIcon.png" class="XL3 rotate" id="x">');
 			$(".hints").append('<img src="img/step1.png" alt="Step1 hints" class="XL3 L3 M3 S3 float" id="firstBubble">');
 			$("#x").click(function() {
 				exit = true;
 					if(exit === true) {
-						$(".hints").remove();
+						$("div#first").remove();
 					}
 				});
-			$(".hints").click(function() {
+			$("div#first").click(function() {
 					$(this).remove();
-				})
+				});
 
-			$(".group-header").click(function() {
-					$(".hints").remove();
+				$("input").click(function() {
+					$("div#first").remove();
 				})
 }//bubbleFirst
 
 
-var bubbleSecondShown = false;
-var bubbleThirdShown = false;
-
 function bubbleSecond() {
 	var body = $("body");
 	var exit = false;
-		body.prepend($('<div class="hints"></div>'));
-			$(".hints").prepend('<img src="img/xIcon.png" class="XL3"rotate" id="x">');
-			$(".hints").append('<img src="img/step2.png" alt="Step1 hints" class="float XL2 L2 M2 S2" id="secondBubble">');
+		body.prepend($('<div class="hints" id="second"></div>'));
+			$(".hints").prepend('<img src="img/xIcon.png" class="XL3 rotate" id="x">');
+			$(".hints").append('<img src="img/step2.png" alt="Step2 hints" class="float XL2 L2 M2 S2" id="secondBubble">');
 			$("#x").click(function() {
 				exit = true;
 					if(exit === true) {
-						$(".hints").remove();
+						$("div#second").remove();
 					}
 				});
 			
 			$("#secondBubble").click(function() {
-					$(".hints").remove();
+					$("div#second").remove();
 				})
 }//bubbleSecond
 
@@ -64,18 +63,18 @@ function bubbleSecond() {
 function bubbleThird() {
 	var body = $("body");
 	var exit = false;
-		body.prepend($('<div class="hints"></div>'));
-			$(".hints").prepend('<img src="img/xIcon.png" class="XL3"rotate" id="x">');
-			$(".hints").append('<img src="img/step3.png" alt="Step1 hints" class="float XL4 L4 M4 S4" id="thirdBubble">');
+		body.prepend($('<div class="hints" id="third"></div>'));
+			$(".hints").prepend('<img src="img/xIcon.png" class="XL3 rotate" id="x">');
+			$(".hints").append('<img src="img/step3.png" alt="Step3 hints" class="float XL4 L4 M4 S4" id="thirdBubble">');
 			$("#x").click(function() {
 				exit = true;
 					if(exit === true) {
-						$(".hints").remove();
+						$("div#third").remove();
 					}
 				});
 			
 			$("#thirdBubble").click(function() {
-					$(".hints").remove();
+					$("div#third").remove();
 				})
 }//bubbleSecond
 
@@ -83,18 +82,18 @@ function bubbleThird() {
 function bubbleFourth() {
 	var body = $("body");
 	var exit = false;
-		body.prepend($('<div class="hints"></div>'));
-			$(".hints").prepend('<img src="img/xIcon.png" class="XL3"rotate" id="x">');
-			$(".hints").append('<img src="img/step3.png" alt="Step1 hints" class="float XL4 L4 M4 S4" id="thirdBubble">');
+		body.prepend($('<div class="hints" id="fourth"></div>'));
+			$(".hints").prepend('<img src="img/xIcon.png" class="XL3 rotate" id="x">');
+			$(".hints").append('<img src="img/step4.png" alt="Step4 hints" class="float XL3 L3 M3 S3 XS2" id="fourthBubble">');
 			$("#x").click(function() {
 				exit = true;
 					if(exit === true) {
-						$(".hints").remove();
+						$("div#fourth").remove();
 					}
 				});
 			
-			$("#thirdBubble").click(function() {
-					$(".hints").remove();
+			$("#fourthBubble, ul").click(function() {
+					$("div#fourth").remove();
 				})
 }//bubbleSecond
 
@@ -107,6 +106,12 @@ var list = $("ul");
 var input = $(".group-header");
 	
 	$( toDoButton ).click(function() {
+
+	    		if(!bubbleSecondShown) {
+	    		bubbleSecond();
+	    		bubbleSecondShown = true;
+	    }//ifStatement
+
 		var current = $( "input" );
 		var value = $( current ).val();
 		var item = $('<li>' + value +'</li>');
@@ -126,20 +131,16 @@ var input = $(".group-header");
 	        				$(input).removeClass("red");
 	    					}, 600);
 			}//ifStatement
-
-			// if (document.cookie !== "ToDoList=bubbleSecond") {
-				bubbleSecond();
-			// }//ifStatement  
 	});//click 
 
 
 /* Repeats the previous step for the enter key press case ¯\_(ツ) */ 
 
-	$( input ).on('keypress', function(evt) {
+	$(input).on('keypress', function(evt) {
     var key = evt.which;
+
 	    if (key === 13) {
-	    	
-	    	if(!bubbleSecondShown) {
+	    		if(!bubbleSecondShown) {
 	    		bubbleSecond();
 	    		bubbleSecondShown = true;
 	    }//ifStatement
@@ -175,7 +176,7 @@ var item;
 var itemSelected = [];
 list.mousedown(function(evt) {
 	item = $(evt.srcElement);
-			$(".hints").remove();
+			$("div#second").remove();
 			
 			 	if(!bubbleThirdShown) {
 	    		bubbleThird();
@@ -197,6 +198,13 @@ list.mousedown(function(evt) {
 
 	var heart = $("[data-type='heart']");
 	heart.click(function() {
+				$("div#third").remove();
+			
+			 	if(!bubbleFourthShown) {
+	    		bubbleFourth();
+	    		bubbleFourthShown = true;
+	    }//ifStatement
+
 				var items = $(itemSelected);
 				if(items.hasClass("makeRed")) {
 						items.removeClass("makeBigger");
@@ -211,9 +219,15 @@ list.mousedown(function(evt) {
 
 	var trash = $("[data-type='trash']");
 		trash.click(function() {
+			$("div#third").remove();
+			
+			 	if(!bubbleFourthShown) {
+	    		bubbleFourth();
+	    		bubbleFourthShown = true;
+	    }//ifStatement
+
 				var lis = document.querySelectorAll("li")
 				var index = $(lis).index(item)-1;
-				console.log(index);
 				if(index > 0) {
 				$(itemSelected).remove();
 				$( "li:gt("+ index +")" ).addClass("wobble");
@@ -245,5 +259,5 @@ $("[data-type='trash']").hover(function() {
 		});
 
 
-// document.cookie = "ToDoList=markFirstVisit";
+document.cookie = "ToDoList=FirstVisit";
 
