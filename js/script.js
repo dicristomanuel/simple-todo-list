@@ -2,6 +2,12 @@
 	// ¯\_(ツ)_/¯ Hi! I'm Cody, I will help you navigate the code.
 
 
+if (document.cookie !== "ToDoList=firstTimeVisit") {
+	$("body").prepend($('<div class="overlay bghint"><img src="img/background_hints.png" alt="background hints" class="fadeIn">'));
+	$(".overlay").append('<img src="img/step1.png" alt="Step1 hints" class="bubbles float">');
+
+} 
+	
 /* (ツ)_/¯ Selects toDoButton and when clicked appends the 
 						new item to the list */ 
 
@@ -128,12 +134,6 @@ $("[data-type='trash']").hover(function() {
 		function() {
 		$(this).removeClass("grow");
 		});
-
-if (document.cookie === "ToDoList=firstTimeVisit") {
-	console.log("YUP");
-} else {
-	console.log("Presentation time!");
-}
 
 
 document.cookie = "ToDoList=firstTimeVisit";

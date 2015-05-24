@@ -299,3 +299,77 @@ ul li {
 }
 
 
+.overlay {
+position: absolute;
+z-index: 1;
+width: 100%;
+}
+
+.bghint {
+  position: absolute;
+  float: left;
+  width: 95%;
+  height: 95%;
+  z-index: 1;
+  left: 0;
+  top:0;
+}
+
+.bubbles {
+  position: absolute;
+  float: left;
+  width: 95%;
+  height: 95%;
+  z-index: 2;
+  left: 0;
+  top:0;
+
+}
+
+.fadeIn {
+  -webkit-animation: fadeIn 2s;
+  -webkit-animation-fill-mode: forwards;
+  opacity: 0;
+
+}
+
+@-webkit-keyframes fadeIn {
+     0%   {opacity: 0;}
+     100% {opacity: 1;}
+}
+
+
+.float {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-animation-name: float;
+    -webkit-animation-duration: 3s;
+  -webkit-animation-timing-function: ease-out, ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-direction: normal, alternate;
+}
+
+
+@-webkit-keyframes float {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
