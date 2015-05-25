@@ -1,6 +1,7 @@
 //ToDoList 
 	// ¯\_(ツ)_/¯ Hi! I'm Cody, I will help you navigate the code.
 
+
 	var bubbleSecondShown = true;
 	var bubbleThirdShown = true;
 	var bubbleFourthShown = true;
@@ -12,10 +13,6 @@ if (document.cookie !== "ToDoList=FirstVisit") {
 	var bubbleFourthShown = false;
 }
 
-// bubbleFirst();
-// var bubbleSecondShown = false;
-// var bubbleThirdShown = false;
-// var bubbleFourthShown = false;
 
 /* if bubbleFirst.cookie doesn't exist show first hint bubble. Also defining functions
 		for the other bubbles which will come later on  ¯\_(ツ) */ 
@@ -99,11 +96,24 @@ function bubbleFourth() {
 
 
 /* (ツ)_/¯ Selects toDoButton and when clicked appends the 
-						new item to the list */ 
+						new item to the list ~ also check if there is any local Storage
+						available and load any content from it (around line 110) */ 
 
 var toDoButton = $("div#add_todo");
 var list = $("ul");
 var input = $(".group-header");
+var keyNum = 0;
+var myStorage = localStorage;
+var myStorageDelete = [];
+
+
+if (myStorage.length !== 0) {
+	for(key in myStorage) {
+		value = myStorage[key];
+		list.append($('<li>' + value +'</li>'));
+	}//forLoop
+}//ifStatement
+
 	
 	$( toDoButton ).click(function() {
 
@@ -112,11 +122,11 @@ var input = $(".group-header");
 	    		bubbleSecondShown = true;
 	    }//ifStatement
 
-		var current = $( "input" );
-		var value = $( current ).val();
+		var current = $("input");
+		var value = $(current).val();
 		var item = $('<li>' + value +'</li>');
 			if (value) {
-				$( list ).append(item);
+				$(list).append(item);
 				$(current).val("");
 				$(item).addClass("wobble");
 				$(input).addClass("green");
@@ -131,42 +141,45 @@ var input = $(".group-header");
 	        				$(input).removeClass("red");
 	    					}, 600);
 			}//ifStatement
-	});//click 
-
+	});//toDoButton.click 
 
 /* Repeats the previous step for the enter key press case ¯\_(ツ) */ 
 
-	$(input).on('keypress', function(evt) {
-    var key = evt.which;
+$(input).on('keypress', function(evt) {
+  var key = evt.which;
 
-	    if (key === 13) {
-	    		if(!bubbleSecondShown) {
-	    		bubbleSecond();
-	    		bubbleSecondShown = true;
-	    }//ifStatement
+    if (key === 13) {
+    		if(!bubbleSecondShown) {
+    		bubbleSecond();
+    		bubbleSecondShown = true;
+    }//ifStatement
 
-		var current = $( "input" );
-		var value = $( current ).val();
-		var item = $('<li>' + value +'</li>');
-			$(current).val("");
-			if (value) {
-				$( list ).append(item);
-				current.value = "";
-				$(item).addClass("wobble")
-				$(input).addClass("green");
+	var current = $("input");
+	var value = $(current).val();
+	item = $('<li>' + value +'</li>');
+		$(current).val("");
+		if (value) {
+			$( list ).append(item);
+			current.value = "";
 
-				setTimeout(function(){
-	        				$(input).removeClass("green");
-	        				$(item).removeClass("wobble")
-	    					}, 600);
-			} else {
-				$(input).addClass("red");
-				setTimeout(function(){
-	        				$(input).removeClass("red");
-	    					}, 600);
-			}//ifStatement
+			myStorage.setItem(keyNum, value);
+			keyNum += 1;
+
+			$(item).addClass("wobble")
+			$(input).addClass("green");
+
+			setTimeout(function(){
+        				$(input).removeClass("green");
+        				$(item).removeClass("wobble")
+    					}, 600);
+		} else {
+			$(input).addClass("red");
+			setTimeout(function(){
+        				$(input).removeClass("red");
+    					}, 600);
 		}//ifStatement
-	});
+	}//ifStatement
+});//input.on'keypress'
 
 
 
@@ -174,16 +187,23 @@ var input = $(".group-header");
 						like delete or heart it. */ 
 var item;
 var itemSelected = [];
+var textSelected;
+
 list.mousedown(function(evt) {
 	item = $(evt.srcElement);
 			$("div#second").remove();
-			
+
 			 	if(!bubbleThirdShown) {
 	    		bubbleThird();
 	    		bubbleThirdShown = true;
 	    }//ifStatement
 
-    setTimeout(function() {
+	    var selected = evt.originalEvent.path[0];
+	    textSelected = $(selected).text();
+	    myStorageDelete.push(textSelected);
+
+
+    // setTimeout(function() {
    		if(item.hasClass("makeBigger")) {
    			item.removeClass("makeBigger");
    			var toRemove = itemSelected.indexOf(item[0]);
@@ -192,68 +212,86 @@ list.mousedown(function(evt) {
 			item.addClass("makeBigger");
 					itemSelected.push(item[0]);
 			}//ifStatement
-    }, 100)
+    // }, 100)
 });
 
 
-	var heart = $("[data-type='heart']");
-	heart.click(function() {
-				$("div#third").remove();
-			
-			 	if(!bubbleFourthShown) {
-	    		bubbleFourth();
-	    		bubbleFourthShown = true;
-	    }//ifStatement
-
-				var items = $(itemSelected);
-				if(items.hasClass("makeRed")) {
-						items.removeClass("makeBigger");
-						items.removeClass("makeRed");
-						itemSelected = [];
-				} else {
-						items.addClass("makeRed");
-						items.removeClass("makeBigger");
-						itemSelected = [];
-				}
-			});
-
-	var trash = $("[data-type='trash']");
-		trash.click(function() {
+var heart = $("[data-type='heart']");
+heart.click(function() {
 			$("div#third").remove();
-			
-			 	if(!bubbleFourthShown) {
-	    		bubbleFourth();
-	    		bubbleFourthShown = true;
-	    }//ifStatement
+		
+		 	if(!bubbleFourthShown) {
+    		bubbleFourth();
+    		bubbleFourthShown = true;
+    }//ifStatement
 
-				var lis = document.querySelectorAll("li")
-				var index = $(lis).index(item)-1;
-				if(index > 0) {
-				$(itemSelected).remove();
-				$( "li:gt("+ index +")" ).addClass("wobble");
-				setTimeout(function(){
-	        				$( "li:gt("+ index +")" ).removeClass("wobble");
-	    					}, 600);
+			var items = $(itemSelected);
+			if(items.hasClass("makeRed")) {
+					items.removeClass("makeBigger");
+					items.removeClass("makeRed");
+					itemSelected = [];
 			} else {
-				$(itemSelected).remove();
-				$( "li" ).addClass("wobble");
-				setTimeout(function(){
-	        				$( "li" ).removeClass("wobble");
-	    					}, 600);
-			}//ifStatement
-
-				itemSelected = [];
+					items.addClass("makeRed");
+					items.removeClass("makeBigger");
+					itemSelected = [];
+			}
 		});
 
-
+var trash = $("[data-type='trash']");
 	trash.click(function() {
+		$("div#third").remove();
 		$(this).removeClass("grow");
-		});
+		
+		 	if(!bubbleFourthShown) {
+    		bubbleFourth();
+    		bubbleFourthShown = true;
+    }//ifStatement
+    console.log(myStorage);
+        console.log(myStorageDelete);
+
+    for(var j=0; j<myStorageDelete.length; j++) {
+    	for(var x=0; x<myStorage.length;x++) {
+    		console.log(myStorageDelete[j]);
+    		console.log(myStorage[x]);
+    		if(myStorageDelete[j] === myStorage[x]) {
+    			console.log(myStorageDelete[j] + " " + myStorage[x]);
+    			delete myStorage[x];
+    		}//ifStatement
+    	}//forLoop
+    }//forLoop
+    myStorageDelete = [];
+    console.log(myStorage);
+        console.log(myStorageDelete);
+		
+
+			var lis = document.querySelectorAll("li")
+			var index = $(lis).index(item)-1;
+			if(index > 0) {
+
+				
+
+			$(itemSelected).remove();
+			$( "li:gt("+ index +")" ).addClass("wobble");
+			setTimeout(function(){
+        				$( "li:gt("+ index +")" ).removeClass("wobble");
+    					}, 600);
+		} else {
+			$(itemSelected).remove();
+			$( "li" ).addClass("wobble");
+			setTimeout(function(){
+        				$( "li" ).removeClass("wobble");
+    					}, 600);
+		}//ifStatement
+
+
+			
+
+});
+
 
 $("[data-type='trash']").hover(function() {
 		$(this).addClass("grow");
 		},
-
 		function() {
 		$(this).removeClass("grow");
 		});
