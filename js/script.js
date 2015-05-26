@@ -103,18 +103,21 @@ var toDoButton = $("div#add_todo");
 var list = $("ul");
 var input = $(".group-header");
 var myStorage = localStorage;
-var keyNum = 0;
+var nextIndex = []
 
+	var keyNum = function() {
+		var num = 0;
+	if (myStorage.length !== 0) {
+			nextIndex = Object.keys(myStorage);
+			num = parseInt(nextIndex.pop()) + 1;
+		}//ifStatement
+		return num;
+	}//keyNum
 
 if (myStorage.length !== 0) {
-	var findLastId = myStorage[Object.keys(myStorage)[Object.keys(myStorage).length - 1]][0];
-	keyNum = findLastId;
 	for(key in myStorage) {
-		var value = myStorage[key];
 		list.append(myStorage.getItem(key));
 	}//forLoop
-} else {
-	keyNum = 0;
 }//ifStatement
 
 	
@@ -132,10 +135,9 @@ if (myStorage.length !== 0) {
 				$(current).val("");
 				$(item).addClass("wobble");
 				$(input).addClass("green");
-				$(item).attr("id", keyNum);
+				$(item).attr("id", keyNum());
 
-				myStorage.setItem(keyNum, item[0].outerHTML);
-				keyNum += 1;
+				myStorage.setItem(keyNum(), item[0].outerHTML);
 
 				setTimeout(function(){
 	        				$(input).removeClass("green");
@@ -167,11 +169,10 @@ $(input).on('keypress', function(evt) {
 		if (value) {
 			$( list ).append(item);
 			current.value = "";
-			$(item).attr("id", keyNum);
+			$(item).attr("id", keyNum());
 
-			myStorage.setItem(keyNum, item[0].outerHTML);
+			myStorage.setItem(keyNum(), item[0].outerHTML);
 
-			keyNum += 1;
 
 			$(item).addClass("wobble")
 			$(input).addClass("green");
@@ -257,12 +258,11 @@ var trash = $("[data-type='trash']");
     
 			var lis = document.querySelectorAll("li")
 			var index = $(lis).index(item)-1;
-			
+		
 			for(var i=0; i<itemSelected.length; i++) {
 				var indexItem = itemSelected[i].id;
 				myStorage.removeItem(indexItem);
 			}
-
 
 			if(index > 0) {
 			$(itemSelected).remove();
