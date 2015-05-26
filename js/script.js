@@ -113,6 +113,8 @@ if (myStorage.length !== 0) {
 		var value = myStorage[key];
 		list.append(myStorage.getItem(key));
 	}//forLoop
+} else {
+	keyNum = 0;
 }//ifStatement
 
 	
@@ -241,8 +243,6 @@ heart.click(function() {
 			}
 
 		 itemSelected = [];
-
-
 });
 
 var trash = $("[data-type='trash']");
