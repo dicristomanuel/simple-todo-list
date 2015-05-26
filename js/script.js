@@ -109,7 +109,7 @@ var myStorageDelete = [];
 
 if (myStorage.length !== 0) {
 	for(key in myStorage) {
-		value = myStorage[key];
+		var value = myStorage[key];
 		list.append($('<li>' + value +'</li>'));
 	}//forLoop
 }//ifStatement
@@ -250,12 +250,9 @@ var trash = $("[data-type='trash']");
         console.log(myStorageDelete);
 
     for(var j=0; j<myStorageDelete.length; j++) {
-    	for(var x=0; x<myStorage.length;x++) {
-    		console.log(myStorageDelete[j]);
-    		console.log(myStorage[x]);
-    		if(myStorageDelete[j] === myStorage[x]) {
-    			console.log(myStorageDelete[j] + " " + myStorage[x]);
-    			delete myStorage[x];
+    	for(keyStorage in myStorage) {
+    		if(myStorageDelete[j] === myStorage[keyStorage]) {
+    			delete myStorage[keyStorage];
     		}//ifStatement
     	}//forLoop
     }//forLoop
