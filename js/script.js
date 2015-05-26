@@ -7,7 +7,7 @@
 	var bubbleFourthShown = true;
 
 if (document.cookie !== "ToDoList=FirstVisit") {
-	// bubbleFirst();
+	bubbleFirst();
 	var bubbleSecondShown = false;
 	var bubbleThirdShown = false;
 	var bubbleFourthShown = false;
@@ -276,14 +276,7 @@ var trash = $("[data-type='trash']");
 			setTimeout(function(){
         				$( "li" ).removeClass("wobble");
     					}, 600);
-
-
-
 		}//ifStatement
-
-
-			
-
 });
 
 
