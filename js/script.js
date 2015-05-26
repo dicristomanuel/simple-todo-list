@@ -7,7 +7,7 @@
 	var bubbleFourthShown = true;
 
 if (document.cookie !== "ToDoList=FirstVisit") {
-	bubbleFirst();
+	// bubbleFirst();
 	var bubbleSecondShown = false;
 	var bubbleThirdShown = false;
 	var bubbleFourthShown = false;
@@ -102,21 +102,21 @@ function bubbleFourth() {
 var toDoButton = $("div#add_todo");
 var list = $("ul");
 var input = $(".group-header");
-var keyNum = 0;
 var myStorage = localStorage;
-var myStorageDelete = [];
+var keyNum = 0;
 
 
 if (myStorage.length !== 0) {
+	var findLastId = myStorage[Object.keys(myStorage)[Object.keys(myStorage).length - 1]][0];
+	keyNum = findLastId;
 	for(key in myStorage) {
 		var value = myStorage[key];
-		list.append($('<li>' + value +'</li>'));
+		list.append(myStorage.getItem(key));
 	}//forLoop
 }//ifStatement
 
 	
 	$( toDoButton ).click(function() {
-
 	    		if(!bubbleSecondShown) {
 	    		bubbleSecond();
 	    		bubbleSecondShown = true;
@@ -130,16 +130,20 @@ if (myStorage.length !== 0) {
 				$(current).val("");
 				$(item).addClass("wobble");
 				$(input).addClass("green");
+				$(item).attr("id", keyNum);
+
+				myStorage.setItem(keyNum, item[0].outerHTML);
+				keyNum += 1;
 
 				setTimeout(function(){
 	        				$(input).removeClass("green");
 	        				$(item).removeClass("wobble")
-	    					}, 600);
+	    					}, 400);
 			} else {
 				$(input).addClass("red");
 				setTimeout(function(){
 	        				$(input).removeClass("red");
-	    					}, 600);
+	    					}, 400);
 			}//ifStatement
 	});//toDoButton.click 
 
@@ -161,8 +165,10 @@ $(input).on('keypress', function(evt) {
 		if (value) {
 			$( list ).append(item);
 			current.value = "";
+			$(item).attr("id", keyNum);
 
-			myStorage.setItem(keyNum, value);
+			myStorage.setItem(keyNum, item[0].outerHTML);
+
 			keyNum += 1;
 
 			$(item).addClass("wobble")
@@ -171,12 +177,12 @@ $(input).on('keypress', function(evt) {
 			setTimeout(function(){
         				$(input).removeClass("green");
         				$(item).removeClass("wobble")
-    					}, 600);
+    					}, 400);
 		} else {
 			$(input).addClass("red");
 			setTimeout(function(){
         				$(input).removeClass("red");
-    					}, 600);
+    					}, 400);
 		}//ifStatement
 	}//ifStatement
 });//input.on'keypress'
@@ -198,12 +204,6 @@ list.mousedown(function(evt) {
 	    		bubbleThirdShown = true;
 	    }//ifStatement
 
-	    var selected = evt.originalEvent.path[0];
-	    textSelected = $(selected).text();
-	    myStorageDelete.push(textSelected);
-
-
-    // setTimeout(function() {
    		if(item.hasClass("makeBigger")) {
    			item.removeClass("makeBigger");
    			var toRemove = itemSelected.indexOf(item[0]);
@@ -211,13 +211,13 @@ list.mousedown(function(evt) {
    		} else {
 			item.addClass("makeBigger");
 					itemSelected.push(item[0]);
-			}//ifStatement
-    // }, 100)
+			}//ifStatement	
 });
 
-
 var heart = $("[data-type='heart']");
+
 heart.click(function() {
+
 			$("div#third").remove();
 		
 		 	if(!bubbleFourthShown) {
@@ -225,17 +225,25 @@ heart.click(function() {
     		bubbleFourthShown = true;
     }//ifStatement
 
-			var items = $(itemSelected);
+     var items = $(itemSelected);
+
 			if(items.hasClass("makeRed")) {
 					items.removeClass("makeBigger");
 					items.removeClass("makeRed");
-					itemSelected = [];
 			} else {
 					items.addClass("makeRed");
 					items.removeClass("makeBigger");
-					itemSelected = [];
+			}//ifStatement	
+
+			for(var i=0; i<itemSelected.length; i++) {
+				var indexItem = itemSelected[i].id;
+				myStorage.setItem(indexItem, items[i].outerHTML);
 			}
-		});
+
+		 itemSelected = [];
+
+
+});
 
 var trash = $("[data-type='trash']");
 	trash.click(function() {
@@ -246,27 +254,17 @@ var trash = $("[data-type='trash']");
     		bubbleFourth();
     		bubbleFourthShown = true;
     }//ifStatement
-    console.log(myStorage);
-        console.log(myStorageDelete);
-
-    for(var j=0; j<myStorageDelete.length; j++) {
-    	for(keyStorage in myStorage) {
-    		if(myStorageDelete[j] === myStorage[keyStorage]) {
-    			delete myStorage[keyStorage];
-    		}//ifStatement
-    	}//forLoop
-    }//forLoop
-    myStorageDelete = [];
-    console.log(myStorage);
-        console.log(myStorageDelete);
-		
-
+    
 			var lis = document.querySelectorAll("li")
 			var index = $(lis).index(item)-1;
+			
+			for(var i=0; i<itemSelected.length; i++) {
+				var indexItem = itemSelected[i].id;
+				myStorage.removeItem(indexItem);
+			}
+
+
 			if(index > 0) {
-
-				
-
 			$(itemSelected).remove();
 			$( "li:gt("+ index +")" ).addClass("wobble");
 			setTimeout(function(){
@@ -278,6 +276,9 @@ var trash = $("[data-type='trash']");
 			setTimeout(function(){
         				$( "li" ).removeClass("wobble");
     					}, 600);
+
+
+
 		}//ifStatement
 
 
